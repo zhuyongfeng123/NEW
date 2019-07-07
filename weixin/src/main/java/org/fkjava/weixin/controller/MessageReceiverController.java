@@ -24,9 +24,7 @@ public class MessageReceiverController {
 	@Autowired
 	@Qualifier("xmlMapper")
 	private XmlMapper xmlMapper;
-
 	private static final Logger LOG = LoggerFactory.getLogger(MessageReceiverController.class);
-
 	@GetMapping
 	public String echo(//
 			@RequestParam("signature") String signature, //
@@ -34,10 +32,7 @@ public class MessageReceiverController {
 			@RequestParam("nonce") String nonce, //
 			@RequestParam("echostr") String echostr//
 	) {
-
-		return echostr;
-	}
-
+	return echostr;}
 	@PostMapping
 	public String receive(//
 			@RequestParam(value = "signature", required = false) String signature, //
@@ -45,26 +40,19 @@ public class MessageReceiverController {
 			@RequestParam(value = "nonce", required = false) String nonce, //
 			@RequestBody String xml//
 	) {
-		
-		LOG.debug("\n收到请求参数\n"//
+	LOG.debug("\n收到请求参数\n"//
 				+ "    signature : {}\n"// 
 				+ "    timestamp : {}\n"//
 				+ "    nonce : {}\n"//
 				+ "收到的请求内容\n{}\n"//
 				, signature, timestamp, nonce, xml);
-		String type = xml.substring(xml.indexOf("<MsgType><![CDATA[") + 18);
-		type = type.substring(0, type.indexOf("]]></MsgType>"));
-
-		
-		Class<? extends InMessage> cla = MessageTypeRegister.getClass(type);
-		try {
-			InMessage inMessage = xmlMapper.readValue(xml, cla);
-			this.messageService.onMessage(inMessage);
-		} catch (Exception e) {
-			LOG.error("处理公众号信息出现错误：{}", e.getMessage());
-			LOG.debug("处理公众号信息时出现的错误详情：", e);
-		}
-
-		return "success";
-	}
-}
+	String type = xml.substring(xml.indexOf("<MsgType><![CDATA[") + 18);
+	type = type.substring(0, type.indexOf("]]></MsgType>"));	
+	Class<? extends InMessage> cla = MessageTypeRegister.getClass(type);
+	try {
+	InMessage inMessage = xmlMapper.readValue(xml, cla);
+	this.messageService.onMessage(inMessage);
+	} catch (Exception e) {
+	LOG.error("处理公众号信息出现错误：{}", e.getMessage());
+	LOG.debug("处理公众号信息时出现的错误详情：", e);}
+	return "success";}}

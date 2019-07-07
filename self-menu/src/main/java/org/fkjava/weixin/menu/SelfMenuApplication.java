@@ -11,12 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("org.fkjava")
 @EntityScan("org.fkjava")
 public class SelfMenuApplication implements EventListenerConfig {
-
 	public static void main(String[] args) {
-		SpringApplication.run(SelfMenuApplication.class, args);
-	}
-
+	SpringApplication.run(SelfMenuApplication.class, args);}
 	@Override
-	public void handleEvent(EventInMessage event) {
-	}
-}
+	public void handleEvent(EventInMessage event) {}}

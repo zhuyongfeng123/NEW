@@ -21,38 +21,26 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 @ComponentScan(basePackages = "org.fkjava")
 @EnableJpaRepositories(basePackages = "org.fkjava")
 @EntityScan(basePackages = "org.fkjava")
-public class UnSubscribeApplication implements ApplicationContextAware
-		, EventListenerConfig {
-
+public class UnSubscribeApplication implements ApplicationContextAware, EventListenerConfig {
 	private static final Logger LOG = LoggerFactory.getLogger(UnSubscribeApplication.class);
 	private ApplicationContext ctx;
-
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		ctx = applicationContext;
-	}
-
+	ctx = applicationContext;}
 	@Bean()
 	public XmlMapper xmlMapper() {
-		XmlMapper mapper = new XmlMapper(StaxUtils.createDefensiveInputFactory());
-		return mapper;
-	}
-
+	XmlMapper mapper = new XmlMapper(StaxUtils.createDefensiveInputFactory());
+	return mapper;}
 	@Override
 	public void handleEvent(EventInMessage event) {
-		LOG.trace("事件处理程序收到的消息：{}", event);
-		String eventType = event.getEvent();
-		eventType = eventType.toLowerCase();
-		String beanName = eventType + "MessageProcessor";
-		EventMessageProcessor mp = (EventMessageProcessor) ctx.getBean(beanName);
-		if (mp == null) {
-			LOG.error("事件 {} 没有找到对应的处理器", eventType);
-		} else {
-			mp.onMessage(event);
-		}
-	}
-
+	LOG.trace("事件处理程序收到的消息：{}", event);
+	String eventType = event.getEvent();
+	eventType = eventType.toLowerCase();
+	String beanName = eventType + "MessageProcessor";
+	EventMessageProcessor mp = (EventMessageProcessor) ctx.getBean(beanName);
+	if (mp == null) {
+	LOG.error("事件 {} 没有找到对应的处理器", eventType);
+	} else {
+	mp.onMessage(event);}}
 	public static void main(String[] args) {
-		SpringApplication.run(UnSubscribeApplication.class, args);
-	}
-}
+	SpringApplication.run(UnSubscribeApplication.class, args);}}

@@ -11,24 +11,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.xml.StaxUtils;
-
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-
 @SpringBootApplication
 public class WeixinApplication implements EventListenerConfig {
-
 	@Bean()
 	public XmlMapper xmlMapper() {
-		XmlMapper mapper = new XmlMapper(StaxUtils.createDefensiveInputFactory());
-		return mapper;
-	}
-
+	XmlMapper mapper = new XmlMapper(StaxUtils.createDefensiveInputFactory());
+	return mapper;}
 	public static void main(String[] args) {
-		SpringApplication.run(WeixinApplication.class, args);
-	}
-
+	SpringApplication.run(WeixinApplication.class, args);}
 	@Override
-	public void handleEvent(EventInMessage event) {
-	
-	}
-}
+	public void handleEvent(EventInMessage event) {}}

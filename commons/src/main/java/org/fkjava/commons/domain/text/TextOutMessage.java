@@ -3,11 +3,8 @@ package org.fkjava.commons.domain.text;
 import org.fkjava.commons.domain.OutMessage;
 
 public class TextOutMessage extends OutMessage {
-
-	// 内部类
 	public static class TextContent {
 		private String content;
-
 		public String getContent() {
 			return content;
 		}
@@ -16,9 +13,7 @@ public class TextOutMessage extends OutMessage {
 			this.content = content;
 		}
 	}
-
 	private TextContent text;
-
 	public TextOutMessage(String toUser, String text) {
 		super();
 		super.setToUser(toUser);
@@ -26,11 +21,9 @@ public class TextOutMessage extends OutMessage {
 		this.text = new TextContent();
 		this.text.content = text;
 	}
-
 	public TextContent getText() {
 		return text;
 	}
-
 	public void setText(TextContent text) {
 		this.text = text;
 	}

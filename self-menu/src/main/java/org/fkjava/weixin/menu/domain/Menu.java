@@ -17,7 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "wx_self_sub_menu")
 public class Menu {
-
 	@Id
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@GeneratedValue(generator = "uuid2")
@@ -25,19 +24,15 @@ public class Menu {
 	private String id;
 	private String name;
 	private String type;
-	// 使用反单引号的目的：避免把关键字生成SQL语句，关键字生成SQL语句，会造成创建表失败
 	@Column(name = "`key`")
 	private String key;
 	private String appId;
 	private String url;
 	private String pagePath;
 	private String mediaId;
-	// 一个一级菜单最多7个二级菜单
 	@OneToMany(cascade = CascadeType.ALL)  // 一对多
 	@JoinColumn(name = "parent_id")
 	private List<Menu> subMenus = new LinkedList<>();
-
-	// 使用@Transient注解，表示值不要保存到数据库，用于维护页面的状态。
 	@Transient
 	private boolean show;
 	@Transient

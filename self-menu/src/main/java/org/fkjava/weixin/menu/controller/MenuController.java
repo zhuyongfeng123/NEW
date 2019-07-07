@@ -14,25 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/lwq_self_menu")
 public class MenuController {
-
 	@Autowired
 	private SelfMenuService selfMenuService;
-
 	@GetMapping
 	public ModelAndView index() {
-		return new ModelAndView("/WEB-INF/views/self-menu/index.jsp");
-	}
-
+	return new ModelAndView("/WEB-INF/views/self-menu/index.jsp");}
 	@GetMapping(produces = "application/json")
 	@ResponseBody
 	public SelfMenu data() {
-		return selfMenuService.findMenus();
-	}
-
+	return selfMenuService.findMenus();}
 	@PostMapping(produces = "application/json")
 	@ResponseBody
 	public String save(@RequestBody SelfMenu menu) {
-		this.selfMenuService.save(menu);
-		return "保存成功";
-	}
-}
+	this.selfMenuService.save(menu);
+	return "保存成功";}}
